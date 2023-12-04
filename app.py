@@ -69,19 +69,19 @@ def Home():
     total1,total2,total3,total4,total5=st.columns(5,gap='small')
     with total1:
         st.info('Sum Salary',icon="💰")
-        st.metric(label="Sum TZS",value=f"{total_investment:,.0f}")
+        st.metric(label="Sum TZS",value=f"{total_salary:,.0f}")
 
     with total2:
         st.info('Most Salary',icon="💰")
-        st.metric(label="Mode TZS",value=f"{investment_mode:,.0f}")
+        st.metric(label="Mode TZS",value=f"{salary_mode:,.0f}")
 
     with total3:
         st.info('Average Salary',icon="💰")
-        st.metric(label="Average TZS",value=f"{investment_mean:,.0f}")
+        st.metric(label="Average TZS",value=f"{salary_mean:,.0f}")
 
     with total4:
         st.info('Central Earnings',icon="💰")
-        st.metric(label="Median TZS",value=f"{investment_median:,.0f}")
+        st.metric(label="Median TZS",value=f"{salary_median:,.0f}")
 
     with total5:
         st.info('Ratings',icon="💰")
