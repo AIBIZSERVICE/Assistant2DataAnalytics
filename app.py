@@ -50,7 +50,7 @@ construction=st.sidebar.multiselect(
 )
 
 df_selection=df.query(
-    "Region==@region & Location==@location & Job ==@job"
+    "Region==@Region & Location==@Location & Job ==@Job"
 )
 
 #this function performs basic descriptive analytics like Mean,Mode,Sum  etc
@@ -76,7 +76,7 @@ def Home():
         st.metric(label="Mode TZS",value=f"{investment_mode:,.0f}")
 
     with total3:
-        st.info('Average',icon="💰")
+        st.info('Average Salary',icon="💰")
         st.metric(label="Average TZS",value=f"{investment_mean:,.0f}")
 
     with total4:
@@ -150,7 +150,7 @@ def graphs():
 def Progressbar():
     st.markdown("""<style>.stProgress > div > div > div > div { background-image: linear-gradient(to right, #99ff99 , #FFFF00)}</style>""",unsafe_allow_html=True,)
     target=3000000000
-    current=df_selection["Investment"].sum()
+    current=df_selection["Salary"].sum()
     percent=round((current/target*100))
     mybar=st.progress(0)
 
@@ -185,7 +185,7 @@ sideBar()
 st.sidebar.image("data/logo1.png",caption="")
 
 
-st.subheader('PICK FEATURES TO EXPLORE DISTRIBUTIONS TRENDS BY QUARTILES',)
+st.subheader('Pick Features to Explore Distribution Tredns by Quartiles',)
 #feature_x = st.selectbox('Select feature for x Qualitative data', df_selection.select_dtypes("object").columns)
 feature_y = st.selectbox('Select feature for y Quantitative Data', df_selection.select_dtypes("number").columns)
 fig2 = go.Figure(
