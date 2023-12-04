@@ -48,9 +48,8 @@ construction=st.sidebar.multiselect(
      options=df["Job"].unique(),
      default=df["Job"].unique(),
 )
-
 df_selection=df.query(
-    "Region==@Region & Location==@Location"
+    "Region==@region & Location==@location & Job==@Job"
 )
 
 #this function performs basic descriptive analytics like Mean,Mode,Sum  etc
@@ -58,6 +57,7 @@ def Home():
     with st.expander("VIEW EXCEL DATASET"):
         showData=st.multiselect('Filter: ',df_selection.columns,default=["StaffNum","Engage","Location","State","Region","Salary","Job","BusinessType","Absentee","Training","Rating"])
         st.dataframe(df_selection[showData],use_container_width=True)
+
     #compute top analytics
     total_investment = float(pd.Series(df_selection['Salary']).sum())
     investment_mode = float(pd.Series(df_selection['Salary']).mode())
