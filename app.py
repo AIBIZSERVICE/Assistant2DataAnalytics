@@ -49,7 +49,7 @@ construction=st.sidebar.multiselect(
      default=df["Job"].unique(),
 )
 df_selection=df.query(
-    "Region==@region & Location==@location & Job==@Job"
+    "Region==@region & Location==@location"
 )
 
 #this function performs basic descriptive analytics like Mean,Mode,Sum  etc
@@ -90,7 +90,7 @@ def Home():
 
     #variable distribution Histogram
     with st.expander("DISTRIBUTIONS BY FREQUENCY"):
-     df.hist(figsize=(16,8),color='#898784', zorder=2, rwidth=0.9,legend = ['Investment']);
+     df.hist(figsize=(16,8),color='#898784', zorder=2, rwidth=0.9,legend = ['Salary']);
      st.pyplot()
 
 #graphs
