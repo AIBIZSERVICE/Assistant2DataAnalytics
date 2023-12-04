@@ -49,9 +49,9 @@ construction=st.sidebar.multiselect(
      default=df["Job"].unique(),
 )
 
-#df_selection=df.query(
-#    "Region==@Region & Location==@Location & Job ==@Job"
-#)
+df_selection=df.query(
+    "Region==@Region & Location==@Location"
+)
 
 #this function performs basic descriptive analytics like Mean,Mode,Sum  etc
 def Home():
