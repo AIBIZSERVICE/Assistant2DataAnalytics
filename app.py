@@ -45,8 +45,8 @@ location=st.sidebar.multiselect(
 )
 construction=st.sidebar.multiselect(
     "SELECT JOB",
-     options=df["JOB"].unique(),
-     default=df["JOB"].unique(),
+     options=df["Job"].unique(),
+     default=df["Job"].unique(),
 )
 
 df_selection=df.query(
