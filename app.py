@@ -102,7 +102,7 @@ def graphs():
         df_selection.groupby(by=["BusinessType"]).count()[["Salary"]].sort_values(by="Salary")
     )
     fig_investment=px.bar(
-       salary_by_business_type_by_business_type,
+       salary_by_business_type,
        x="Salary",
        y=salary_by_business_type.index,
        orientation="h",
