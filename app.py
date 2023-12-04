@@ -12,7 +12,7 @@ import plotly.graph_objs as go
 #from query import *
 
 st.set_page_config(page_title="Dashboard",page_icon="🌍",layout="wide")
-st.header("ANALYTICAL PROCESSING, KPI, TRENDS & PREDICTIONS")
+st.header("Data Analytics, KPI, Trends & Predictions")
 
 #all graphs we use custom css not streamlit 
 theme_plotly = None 
@@ -24,13 +24,12 @@ with open('style.css')as f:
 
 #uncomment these two lines if you fetch data from mysql
 #result = view_all_data()
-#df=pd.DataFrame(result,columns=["Policy","Expiry","Location","State","Region","Investment","Construction","BusinessType","Earthquake","Flood","Rating","id"])
+#df=pd.DataFrame(result,columns=["StaffNum","Engage","Location","State","Region","Staff","Job","BusinessType","Absentee","Training","Rating","id"])
 
 #load excel file | comment this line when  you fetch data from mysql
 df=pd.read_excel('data.xlsx', sheet_name='Sheet1')
 
 #side bar logo
-
 
 #switcher
 
@@ -45,35 +44,35 @@ location=st.sidebar.multiselect(
      default=df["Location"].unique(),
 )
 construction=st.sidebar.multiselect(
-    "SELECT CONSTRUCTION",
-     options=df["Construction"].unique(),
-     default=df["Construction"].unique(),
+    "SELECT JOB",
+     options=df["JOB"].unique(),
+     default=df["JOB"].unique(),
 )
 
 df_selection=df.query(
-    "Region==@region & Location==@location & Construction ==@construction"
+    "Region==@region & Location==@location & Job ==@job"
 )
 
 #this function performs basic descriptive analytics like Mean,Mode,Sum  etc
 def Home():
     with st.expander("VIEW EXCEL DATASET"):
-        showData=st.multiselect('Filter: ',df_selection.columns,default=["Policy","Expiry","Location","State","Region","Investment","Construction","BusinessType","Earthquake","Flood","Rating"])
+        showData=st.multiselect('Filter: ',df_selection.columns,default=["StaffNum","Engage","Location","State","Region","Salary","Job","BusinessType","Absentee","Training","Rating"])
         st.dataframe(df_selection[showData],use_container_width=True)
     #compute top analytics
-    total_investment = float(pd.Series(df_selection['Investment']).sum())
-    investment_mode = float(pd.Series(df_selection['Investment']).mode())
-    investment_mean = float(pd.Series(df_selection['Investment']).mean())
-    investment_median= float(pd.Series(df_selection['Investment']).median()) 
+    total_investment = float(pd.Series(df_selection['Salary']).sum())
+    investment_mode = float(pd.Series(df_selection['Salary']).mode())
+    investment_mean = float(pd.Series(df_selection['Salary']).mean())
+    investment_median= float(pd.Series(df_selection['Salary']).median()) 
     rating = float(pd.Series(df_selection['Rating']).sum())
 
 
     total1,total2,total3,total4,total5=st.columns(5,gap='small')
     with total1:
-        st.info('Sum Investment',icon="💰")
+        st.info('Sum Salary',icon="💰")
         st.metric(label="Sum TZS",value=f"{total_investment:,.0f}")
 
     with total2:
-        st.info('Most Investment',icon="💰")
+        st.info('Most Salary',icon="💰")
         st.metric(label="Mode TZS",value=f"{investment_mode:,.0f}")
 
     with total3:
@@ -96,19 +95,19 @@ def Home():
 
 #graphs
 def graphs():
-    #total_investment=int(df_selection["Investment"]).sum()
+    #total_investment=int(df_selection["Salary"]).sum()
     #averageRating=int(round(df_selection["Rating"]).mean(),2) 
     #simple bar graph  investment by business type
-    investment_by_business_type=(
-        df_selection.groupby(by=["BusinessType"]).count()[["Investment"]].sort_values(by="Investment")
+    salary_by_business_type=(
+        df_selection.groupby(by=["BusinessType"]).count()[["Salary"]].sort_values(by="Salary")
     )
     fig_investment=px.bar(
        investment_by_business_type,
-       x="Investment",
+       x="Salary",
        y=investment_by_business_type.index,
        orientation="h",
-       title="<b> INVESTMENT BY BUSINESS TYPE </b>",
-       color_discrete_sequence=["#0083B8"]*len(investment_by_business_type),
+       title="<b> Total Salary BY BUSINESS TYPE </b>",
+       color_discrete_sequence=["#0083B8"]*len(salary_by_business_type),
        template="plotly_white",
     )
     fig_investment.update_layout(
@@ -120,13 +119,13 @@ def graphs():
      )
 
     #simple line graph investment by state
-    investment_state=df_selection.groupby(by=["State"]).count()[["Investment"]]
+    investment_state=df_selection.groupby(by=["State"]).count()[["Salary"]]
     fig_state=px.line(
        investment_state,
        x=investment_state.index,
-       y="Investment",
+       y="Salary",
        orientation="v",
-       title="<b> INVESTMENT BY STATE </b>",
+       title="<b> Total Salary BY STATE </b>",
        color_discrete_sequence=["#0083b8"]*len(investment_state),
        template="plotly_white",
     )
