@@ -59,10 +59,10 @@ def Home():
         st.dataframe(df_selection[showData],use_container_width=True)
 
     #compute top analytics
-    total_investment = float(pd.Series(df_selection['Salary']).sum())
-    investment_mode = float(pd.Series(df_selection['Salary']).mode())
-    investment_mean = float(pd.Series(df_selection['Salary']).mean())
-    investment_median= float(pd.Series(df_selection['Salary']).median()) 
+    total_salary = float(pd.Series(df_selection['Salary']).sum())
+    salary_mode = float(pd.Series(df_selection['Salary']).mode())
+    salary_mean = float(pd.Series(df_selection['Salary']).mean())
+    salary_median= float(pd.Series(df_selection['Salary']).median()) 
     rating = float(pd.Series(df_selection['Rating']).sum())
 
 
@@ -95,16 +95,16 @@ def Home():
 
 #graphs
 def graphs():
-    #total_investment=int(df_selection["Salary"]).sum()
+    #total_salary=int(df_selection["Salary"]).sum()
     #averageRating=int(round(df_selection["Rating"]).mean(),2) 
-    #simple bar graph  investment by business type
+    #simple bar graph salary by business type
     salary_by_business_type=(
         df_selection.groupby(by=["BusinessType"]).count()[["Salary"]].sort_values(by="Salary")
     )
     fig_investment=px.bar(
-       investment_by_business_type,
+       salary_by_business_type_by_business_type,
        x="Salary",
-       y=investment_by_business_type.index,
+       y=salary_by_business_type.index,
        orientation="h",
        title="<b> Total Salary BY BUSINESS TYPE </b>",
        color_discrete_sequence=["#0083B8"]*len(salary_by_business_type),
@@ -191,7 +191,7 @@ feature_y = st.selectbox('Select feature for y Quantitative Data', df_selection.
 fig2 = go.Figure(
     data=[go.Box(x=df['BusinessType'], y=df[feature_y])],
     layout=go.Layout(
-        title=go.layout.Title(text="BUSINESS TYPE BY QUARTILES OF INVESTMENT"),
+        title=go.layout.Title(text="Business Type by Quartiles Salary"),
         plot_bgcolor='rgba(0, 0, 0, 0)',  # Set plot background color to transparent
         paper_bgcolor='rgba(0, 0, 0, 0)',  # Set paper background color to transparent
         xaxis=dict(showgrid=True, gridcolor='#cecdcd'),  # Show x-axis grid and set its color
