@@ -44,9 +44,9 @@ location=st.sidebar.multiselect(
      default=df["Location"].unique(),
 )
 construction=st.sidebar.multiselect(
-    "SELECT JOB",
-     options=df["Job"].unique(),
-     default=df["Job"].unique(),
+    "SELECT BUSINESS TYPE",
+     options=df["BusinessType"].unique(),
+     default=df["BusinessType"].unique(),
 )
 df_selection=df.query(
     "Region==@region & Location==@location"
