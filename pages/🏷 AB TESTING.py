@@ -8,7 +8,7 @@ fig = go.Figure()
  
 st.set_page_config(page_title="Dashboard",page_icon="🌍",layout="wide")
 
-st.header("**HYPOTHESIS  TESTING** UNDER T-STUDENT DISTRIBUTION CURVE, TWO TAILED TEST")  
+st.header("**AB TESTING** UNDER T-STUDENT DISTRIBUTION CURVE, TWO TAILED TEST")  
 theme_plotly = None 
 
 st.subheader("𝑡=(𝑋 ̅−𝜇)/(𝑆⁄√𝑛)~𝑡(𝑛−1)")
